@@ -1,4 +1,4 @@
-package com.github.xabgesagtx.example;
+package com.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
+
+import java.io.IOException;
+
+import static com.example.parser.config.StructureCardBuilder.BuildDescription;
 
 /**
  * 
@@ -47,7 +51,12 @@ class ExampleBot extends TelegramLongPollingBot {
 			SendMessage response = new SendMessage();
 			Long chatId = message.getChatId();
 			response.setChatId(String.valueOf(chatId));
-			String text = message.getText();
+			String text = null;
+			try {
+				text = BuildDescription(message.getText());
+			} catch (IOException e) {
+				text="Введите валидную ссылку";
+			}
 			response.setText(text);
 			try {
 				execute(response);
