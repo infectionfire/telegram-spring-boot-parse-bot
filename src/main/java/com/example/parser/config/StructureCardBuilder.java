@@ -14,8 +14,7 @@ import static com.example.parser.modules.VI.Characteristics.createCharacteristic
 import static com.example.parser.modules.VI.Equipment.createComplectationVI;
 import static com.example.parser.modules.VI.Features.createFeaturesVI;
 import static com.example.parser.modules.VI.Weight.createWeightVI;
-import static com.example.parser.page_processing.GetPageVI.getPage;
-import static com.example.parser.page_processing.GetPageVI.getPageFromUrl;
+import static com.example.parser.page_processing.GetPageVI.*;
 
 
 /**
@@ -91,7 +90,7 @@ public class StructureCardBuilder {
                 .append(createAdvantagesVI(document))
                 .append(createComplectationVI(document))
                 .append(createWeightVI(document)));
-
+        if (oneProductCard.length()<155) return "Введите валидную ссылку";
         return oneProductCard.toString()
                 .replaceAll(";;", ";")
                 .replaceAll(";;", ";")
@@ -99,5 +98,31 @@ public class StructureCardBuilder {
                 .replaceAll("\\.;", ";")
                 .replaceAll("\\.\\.", ".")
                 .replaceAll("\\.\\.", ".");
+    }
+    //функции для заполнения ттх
+    public static void BuildDescriptionsFromMessage(List<String> taskList) throws IOException {
+        List<String> productCards = new ArrayList<>(100);
+        List<Document> documentList = getPageFromMessage(taskList);
+        List<String> photoListBuilder = new ArrayList<>(100);
+        List<String> instrListBuilder = new ArrayList<>(100);
+        for(Document document:documentList) {
+
+            StringBuilder oneProductCard = new StringBuilder();
+
+            oneProductCard.append(createFeaturesVI(document))
+                    .append(createCharacteristicsVI(document))
+                    .append(createAdvantagesVI(document))
+                    .append(createComplectationVI(document))
+                    .append(createWeightVI(document));
+            productCards.add(oneProductCard.toString()
+                    .replaceAll(";;",";")
+                    .replaceAll("\\.;", ";")
+                    .replaceAll("\\.\\.","."));
+            photoListBuilder.add(PhotoCrawler.getPhoto(document));
+            instrListBuilder.add(ManualCrawler.getManual(document));
+        }
+        setPhotos(photoListBuilder);
+        setInstr(instrListBuilder);
+        setTtx(productCards) ;
     }
 }

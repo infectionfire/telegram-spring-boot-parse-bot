@@ -35,4 +35,13 @@ public class GetPageVI {
 
         return new Document("Has error");
     }
+
+    public static List<Document> getPageFromMessage(List<String> urls) throws IOException {
+        List<Document> documentList = new ArrayList<>();
+        //меняем значение для выбора ссылки, отсчет с нуля
+        for (String url: urls) {
+            documentList.add(Jsoup.parse(new URL(url), 45000));
+        }
+        return documentList;
+    }
 }
