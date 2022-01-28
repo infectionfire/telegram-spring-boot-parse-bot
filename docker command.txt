@@ -1,0 +1,5 @@
+docker build .
+docker run eace443fbc89
+docker run -p 8080:8080 eace443fbc89
+
+docker stop eace443fbc89
