@@ -4,8 +4,6 @@ import com.example.parser.methods.HtmlToText;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
-
 
 /**
  *Формирование начального текста описания товарной карточки
@@ -18,7 +16,7 @@ public class Features implements Create{
     }
     //доделать метод
 
-    public static StringBuilder createFeaturesVI(Document document)  throws IOException {
+    public static StringBuilder createFeaturesVI(Document document) {
 
         Document page = document;
         Element element = page.select("div.content-block").first();

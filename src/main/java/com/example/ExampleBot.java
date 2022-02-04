@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 
 import static com.example.parser.config.StructureCardBuilder.BuildDescription;
 
@@ -51,21 +49,19 @@ class ExampleBot extends TelegramLongPollingBot {
 		if (update.hasMessage()) {
 			Message message = update.getMessage();
 			SendMessage response = new SendMessage();
-
 			Long chatId = message.getChatId();
 			response.setChatId(String.valueOf(chatId));
 			String text = null;
-			try {
-				text = BuildDescription(message.getText());
-			} catch (IOException e) {
-				text="Введите валидную ссылку";
-			}
-			DataServiceImpl dataService = new DataServiceImpl();
-			Data data = new Data(text,message.getText());
-			try {
-				dataService.saveData(data);
-			} catch (Exception e) {
-				logger.info("Not unique value");
+			text = BuildDescription(message.getText());
+
+			if (!text.equals("Введите валидную ссылку")){
+				DataServiceImpl dataService = new DataServiceImpl();
+				Data data = new Data(text,message.getText());
+				try {
+					dataService.saveData(data);
+				} catch (Exception e) {
+					logger.info("Not unique value");
+				}
 			}
 			response.setText(text);
 			try {
@@ -75,28 +71,10 @@ class ExampleBot extends TelegramLongPollingBot {
 				logger.error("Failed to send message \"{}\" due to error: {}", chatId, e.getMessage());
 			}
 		}
-		if (update.getMessage().hasDocument())
-		{
-			Document document = update.getMessage().getDocument();
-			Message message = update.getMessage();
-			String file_id = document.getFileId();
-			SendMessage response = new SendMessage();
-			response.setText(file_id);
-			long chatId = message.getChatId();
-			response.setChatId(String.valueOf(chatId));
-			try {
-				execute(response);
-			} catch (TelegramApiException e) {
-				e.printStackTrace();
-			}
-			logger.info("Sent message \"{}\" to {}",chatId, file_id);
-		}
-
 	}
 
 	@PostConstruct
 	public void start() {
 		logger.info("username: {}, token: {}", username, token);
 	}
-
 }

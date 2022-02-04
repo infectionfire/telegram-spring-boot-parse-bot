@@ -17,7 +17,7 @@ public class Advantages implements Create{//особенности
     }
 
 
-    public static StringBuilder createAdvantagesVI(Document document) throws IOException {
+    public static StringBuilder createAdvantagesVI(Document document) {
         StringBuilder advantagesCreator = new StringBuilder("<strong>Особенности:</strong>\n\n");
         Element element = document
                 .select("div.advantages.spoiler")

@@ -4,8 +4,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-
 import static com.example.parser.methods.StringCharacterFormatter.characteristicsFormatter;
 
 /**
@@ -17,7 +15,7 @@ public class Characteristics implements Create{//технические хара
         throw new IllegalStateException("Utility class");
     }
 
-    public static StringBuilder createCharacteristicsVI(Document document) throws IOException {
+    public static StringBuilder createCharacteristicsVI(Document document) {
         StringBuilder charact = new StringBuilder("<strong>Технические характеристики:</strong>\n\n");
         Element element = document
                 .select("div.features.spoiler")

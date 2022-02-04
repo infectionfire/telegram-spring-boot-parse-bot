@@ -3,8 +3,6 @@ package com.example.parser.modules.VI;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
-
 /**
  * Парсит страницу и берет первое фото товара
  * можно переделать, сделать сплит через " и вытаскивать ссылки через endWith
@@ -14,12 +12,12 @@ public class PhotoCrawler implements Create{
 
     private static String photo = "";
 
-    public static String getPhoto(Document document) throws IOException {
+    public static String getPhoto(Document document)  {
         PhotoUrlsCreateVI(document);
         return photo;
     }
 
-    public static String PhotoUrlsCreateVI(Document document) throws IOException {
+    public static String PhotoUrlsCreateVI(Document document) {
         Document page = document;
         Element imageElement = page.select("div.item").first();
         if (imageElement!=null) {

@@ -4,8 +4,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-
 /**
  * Формирование поля "Комплектация" для описания товарной карточки
  */
@@ -16,7 +14,7 @@ public class Equipment implements Create{
         throw new IllegalStateException("Utility class");
     }
 
-    public static StringBuilder createComplectationVI(Document document) throws IOException {
+    public static StringBuilder createComplectationVI(Document document) {
         StringBuilder equipment = new StringBuilder("<strong>Комплектация:</strong>\n\n");
         Document page = document;
 
