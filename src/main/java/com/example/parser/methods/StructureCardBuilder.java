@@ -1,4 +1,4 @@
-package com.example.parser.config;
+package com.example.parser.methods;
 
 
 import org.jsoup.Jsoup;
@@ -6,8 +6,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.parser.methods.ReplaceSigns.replaceSigns;
 import static com.example.parser.modules.VI.Advantages.createAdvantagesVI;
@@ -27,7 +25,7 @@ public class StructureCardBuilder {
     }
 
 
-    public static String BuildDescription(String search) {
+    public static String BuildDescriptionVI(String search) {
 
         Document document;
         try {

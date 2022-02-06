@@ -1,6 +1,7 @@
 package com.example.parser.modules.VI;
 
 import com.example.parser.methods.HtmlToText;
+import com.example.parser.modules.Creator;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -9,7 +10,7 @@ import org.jsoup.nodes.Element;
  *Формирование начального текста описания товарной карточки
  */
 
-public class Features implements Create{
+public class Features implements Creator {
 
     private Features() {
         throw new IllegalStateException("Utility class");

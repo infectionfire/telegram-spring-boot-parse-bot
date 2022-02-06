@@ -14,7 +14,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
 
-import static com.example.parser.config.StructureCardBuilder.BuildDescription;
+import static com.example.parser.methods.StructureCardBuilder.BuildDescriptionVI;
 
 /**
  * 
@@ -52,7 +52,7 @@ class ExampleBot extends TelegramLongPollingBot {
 			Long chatId = message.getChatId();
 			response.setChatId(String.valueOf(chatId));
 			String text = null;
-			text = BuildDescription(message.getText());
+			text = BuildDescriptionVI(message.getText());
 
 			if (!text.equals("Введите валидную ссылку")){
 				DataServiceImpl dataService = new DataServiceImpl();

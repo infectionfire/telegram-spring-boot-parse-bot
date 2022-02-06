@@ -1,16 +1,15 @@
 package com.example.parser.modules.VI;
 
+import com.example.parser.modules.Creator;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.IOException;
 
 /**
  * Формирование поля особенности для описания товарной карточки
  */
 
-public class Advantages implements Create{//особенности
+public class Advantages implements Creator {//особенности
 
     private Advantages() {
         throw new IllegalStateException("Utility class");
